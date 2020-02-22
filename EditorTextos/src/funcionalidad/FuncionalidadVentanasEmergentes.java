@@ -152,6 +152,10 @@ public class FuncionalidadVentanasEmergentes {
 		
 		explorador.setDialogTitle(msg);
 		explorador.setApproveButtonText(ok);
+		
+		FileNameExtensionFilter filtro = new FileNameExtensionFilter("TXT","txt");
+		explorador.setFileFilter(filtro);
+		
 		if (JFileChooser.APPROVE_OPTION == explorador.showSaveDialog(null))
 		{
 		String ruta = explorador.getSelectedFile().getPath();
