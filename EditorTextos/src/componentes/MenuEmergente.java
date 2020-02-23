@@ -8,14 +8,13 @@ import javax.swing.JPopupMenu;
 
 public class MenuEmergente extends JPopupMenu{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	private JMenuItem mENegrita;
 	private JMenuItem mECursiva;
 	private JMenuItem mESubrayado;
+	
+	//....
 	
 	private JMenuItem mETextIzq;
 	private JMenuItem mETextCentro;

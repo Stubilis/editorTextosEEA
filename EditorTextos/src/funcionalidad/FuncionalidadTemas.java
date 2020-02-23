@@ -11,7 +11,9 @@ import javax.swing.UnsupportedLookAndFeelException;
 import componentes.EditorTexto;
 
 public class FuncionalidadTemas {
+	//Mejora
 	
+	//Como en el resto de clases relacionadad con la funcionalidad, necesitaremos un EditorTexto
 	private EditorTexto editorTexto;
 
 	private JMenuItem mDefaultAcryl;
@@ -55,13 +57,17 @@ public class FuncionalidadTemas {
 	
 	
 	//
-	String key ="EEA";
-	String creador="EEA";
+	private String key ="EEA";
+	private String creador="EEA";
 	
 	public FuncionalidadTemas (EditorTexto editorTexto) {
 		
+		
 		this.editorTexto = editorTexto;
-
+		//Inicializamos los elementos del menu superior relacionados con el cambio de Skin del programa
+		//Al igual que con las otras clases del paquete funcionalidad no debemos preocuparnos por añadir
+		//texto o imagenes a los componentes puesto que ya lo habremos hecho en sus respectivas clases dentro del
+		//paquete componenetes
 		this.mDefaultAcryl= editorTexto.getMenuSuperior().getmDefaultAcryl();
 		this.mGreenAcryl= editorTexto.getMenuSuperior().getmGreenAcryl();
 		this.mLemmonAcryl= editorTexto.getMenuSuperior().getmLemmonAcryl();
@@ -100,6 +106,8 @@ public class FuncionalidadTemas {
 		this.mLemmonSmart = editorTexto.getMenuSuperior().getmLemmonSmart();
 		this.mGraySmart = editorTexto.getMenuSuperior().getmGraySmart();
 		
+		//Añadimos el action Lisener que se disparaá cuando pulsemos el botón
+		
 		mDefaultAcryl.addActionListener(e -> { cambiarTemaAcril(e);});
 		mGreenAcryl.addActionListener(e -> { cambiarTemaAcril(e);});
 		mLemmonAcryl.addActionListener(e -> { cambiarTemaAcril(e);});
@@ -123,6 +131,15 @@ public class FuncionalidadTemas {
 		mBrownSmart.addActionListener(e -> { cambiarTemaSmart(e);});
 		mLemmonSmart.addActionListener(e -> { cambiarTemaSmart(e);});
 		mGraySmart.addActionListener(e -> { cambiarTemaSmart(e);});
+		
+		
+		//Los metodos comparten una misma estructura, para los temas simples, que no disponen de opciones de 
+		// cambio de color podemos implementarlos con solo dos lineas de codigo:
+		//UIManager.setLookAndFeel("com.jtattoo.plaf.tema.TemaLookAndFeel");
+		//SwingUtilities.updateComponentTreeUI(editorTexto);
+		//Las Skins utilizadas son parte de la libreria Jtatto0 (lib)
+		
+		//Igualmente deberemos capturar las excepciones 
 		
 		mDefaultAluminium.addActionListener(e -> { 
 			  try {
@@ -254,18 +271,11 @@ public class FuncionalidadTemas {
 		
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
 	}
 
 	private void cambiarTemaSmart(ActionEvent e) {
 		// TODO Auto-generated method stub
+		
 		String tema = "Default";
 		if(e.getSource().equals(mDefaultSmart))	tema = "Default";
 		if(e.getSource().equals(mGreenSmart))	tema = "Green";

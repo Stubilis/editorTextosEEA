@@ -133,7 +133,9 @@ public class FuncionalidadIdiomas {
 	private JMenuItem mGraySmart;
 	
 
-	
+	//En esta clase vamos a encargarnos de la traduccion del editor
+	//Encontramos tres metodos encargados cada uno de cambiar los diferentes elementos a cada idioma
+	//Ademas de cambiar la locale de elementos como los JOptionPane que sino no se verían afectados
 	
 	public FuncionalidadIdiomas(EditorTexto editorTexto) {
 		

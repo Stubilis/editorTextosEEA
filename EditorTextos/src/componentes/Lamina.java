@@ -7,12 +7,10 @@ import javax.swing.JPanel;
 
 
 
+
 public class Lamina extends JPanel{
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+
+	private static final long serialVersionUID = 4606338651734409530L;
 	private BarraHerramientas barraHerramientas;
 	private BorderLayout layout;
 	private PanelTexto jTextPane;
@@ -28,7 +26,7 @@ public class Lamina extends JPanel{
 		jTextPane = new PanelTexto();
 		jTextPane.setComponentPopupMenu(menuEmergente);
 		
-	
+		//JTextPane se inicia vacio 
 		jTextPane.setText("");
 		
 		spScroll.add(jTextPane);

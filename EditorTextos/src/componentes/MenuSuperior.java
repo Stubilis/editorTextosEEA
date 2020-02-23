@@ -11,10 +11,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JRadioButtonMenuItem;
 
 public class MenuSuperior extends JMenuBar{
-	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	
 	private JMenu menu1;	//fichero
@@ -31,6 +28,9 @@ public class MenuSuperior extends JMenuBar{
 	
 	private JMenuItem mAbrir;
 	private JMenuItem mAbrirHTML;
+	
+     //	.....
+
 	private JMenuItem mAbrirRTF;
 	private JMenuItem mGuardarSinFormato;
 	private JMenuItem mGuardarHTML;

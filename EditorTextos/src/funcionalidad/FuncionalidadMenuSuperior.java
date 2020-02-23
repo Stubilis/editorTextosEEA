@@ -16,6 +16,8 @@ import javax.swing.text.StyledEditorKit;
 import componentes.EditorTexto;
 
 public class FuncionalidadMenuSuperior implements ActionListener{
+	
+	//Implementamos un action listener
 
 	private JMenuItem mArial;
 	private JMenuItem mVerdana;
@@ -39,11 +41,15 @@ public class FuncionalidadMenuSuperior implements ActionListener{
 	private JComboBox<String> cbFuente;
 	private JComboBox<String> cbTamanyoLetra;
 	
+	//Para mantener la coherencia
 	private JToggleButton jtbNegrita;
 	private JToggleButton jtbCursiva;	
 	private JToggleButton jtbSubrayado;
 	
 	public FuncionalidadMenuSuperior(EditorTexto editorTexto) {
+		
+		//Necesitamos pasarle un EditorTexto para relacionar los botones del menu superior con los 
+		//botones declarados en esta clase
 		
 		this.mArial  =editorTexto.getMenuSuperior().getmArial();
 		this.mVerdana  =editorTexto.getMenuSuperior().getmVerdana();
@@ -70,9 +76,14 @@ public class FuncionalidadMenuSuperior implements ActionListener{
 		this.jtbCursiva = editorTexto.getLamina().getBarraHerramientas().getJtbCursiva();
 		this.jtbSubrayado  =editorTexto.getLamina().getBarraHerramientas().getJtbSubrayado();
 		
-		mNegrita.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,InputEvent.CTRL_DOWN_MASK));
-		mCursiva.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_K,InputEvent.CTRL_DOWN_MASK));
-		mSubrayado.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,InputEvent.CTRL_DOWN_MASK));
+		
+		//Añadimos atajos de teclado 
+		mNegrita.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,InputEvent.CTRL_DOWN_MASK));	//Ctrl + N
+		mCursiva.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_K,InputEvent.CTRL_DOWN_MASK));	//Ctrl + K
+		mSubrayado.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,InputEvent.CTRL_DOWN_MASK));	//Ctrl + S		
+		
+		//Añadimos un actionListener a cada botón del menu y le pasamos this (Fms) como argumento
+		//Para poder hacer esto hemos tenido que implementar un action listener en la clase
 		
 		mArial.addActionListener(this);
 		mVerdana.addActionListener(this);
@@ -92,10 +103,18 @@ public class FuncionalidadMenuSuperior implements ActionListener{
 		
 	}
 
+	
+	//Disponemos de un unico método actionPerformed
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+		//Utilizamos un switch 
 		 switch(e.getActionCommand()) {
+		 //Como el switch utiliza un String debemos asegurarnos de que esten todas las traducciones
+		 //Sino al cambiar de idioma los botones dejarán de funcionar
+		 
+		 //Para simplificar el funcionamiento del editor y ademas mantener la coherencia, al pulsar
+		 //un botón del menuSuperior le mandaremos un click al botón equivalente situado en la barra de herramientas
+		 //No debemos preocuparnos por mantenr la cocherencia ya que de eso se encargan los métodos de FuncionalidadBarraHerramientas
 		 
 		  case "Negrita": jtbNegrita.doClick(); break;
 		  case "Cursiva": jtbCursiva.doClick();break;
@@ -123,12 +142,14 @@ public class FuncionalidadMenuSuperior implements ActionListener{
 		  case "Aligner le centre": new StyledEditorKit.AlignmentAction("alinearCentro",StyleConstants.ALIGN_CENTER).actionPerformed(e);break;
 		  case "Aligner à droite": new StyledEditorKit.AlignmentAction("alinearDer",StyleConstants.ALIGN_RIGHT).actionPerformed(e);break;
 		  case "Aligner justifié": new StyledEditorKit.AlignmentAction("alinearDer",StyleConstants.ALIGN_JUSTIFIED).actionPerformed(e);break;
-		  
+		 
+		  //Al seleccionar una fuente en el menu, se la pasaremos al comboBox y lo activaremos para cambiar la fuente
 		  case "Arial":	 cbFuente.setSelectedItem("Arial"); cbFuente.actionPerformed(e); break;
 		  case "Verdana": cbFuente.setSelectedItem("Verdana"); cbFuente.actionPerformed(e); break;
 		  case "Courier": cbFuente.setSelectedItem("Courier New"); cbFuente.actionPerformed(e); break;
 		  case "Impact": cbFuente.setSelectedItem("Impact");  cbFuente.actionPerformed(e);break;
-		  
+		  //Los botones del tamaño estan dentro de un grupo por lo que no debemos preocuparnos por 
+		  // deseleccionarlos. La funcionalidad es igual que con la fuente
 		  case "10": cbTamanyoLetra.setSelectedItem("10");cbTamanyoLetra.actionPerformed(e);break;
 		  case "14": cbTamanyoLetra.setSelectedItem("14");cbTamanyoLetra.actionPerformed(e);break;
 		  case "18": cbTamanyoLetra.setSelectedItem("18");cbTamanyoLetra.actionPerformed(e);break;

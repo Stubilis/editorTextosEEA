@@ -21,9 +21,8 @@ import funcionalidad.FuncionalidadVentanasEmergentes;
 
 public class EditorTexto extends JFrame implements WindowListener{
 	
-	/**
-	 * 
-	 */
+	//WindowListener -> captura cambios en la ventana -> metodo windowClosing ->pregunta si quieres salir
+	
 	private static final long serialVersionUID = 1L;
 	
 	private MenuSuperior menuSuperior;
@@ -38,11 +37,14 @@ public class EditorTexto extends JFrame implements WindowListener{
 	public EditorTexto() {
 		
 		
-		
 		Toolkit pantalla = Toolkit.getDefaultToolkit();
+		
+		//titulo de la ventana
 		this.setTitle(ResourceBundle.getBundle("resources.Etiquetas").getString("tag_titulo_frame"));
 		Image iconoFrame = pantalla.getImage("./multimedia/images/iconoaplicacion.png");
+		//icono de la aplicación
 		setIconImage(iconoFrame);
+		
 		setBounds(250,250,800,600);
 		
 		menuSuperior = new MenuSuperior();

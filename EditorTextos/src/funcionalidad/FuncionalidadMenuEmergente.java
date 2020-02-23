@@ -15,6 +15,9 @@ import componentes.EditorTexto;
 import componentes.MenuEmergente;
 
 public class FuncionalidadMenuEmergente implements ActionListener{
+	
+	//El menu emergente funciona de la misma forma que el menu superior, sus elementos simplemente se encargan de 
+	//activar a sus equivalentes en la barra de herramientas
 
 	private MenuEmergente  menuEm;
 	

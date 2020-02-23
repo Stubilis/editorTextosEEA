@@ -16,17 +16,16 @@ public class PanelTexto extends JTextPane implements MouseInputListener{
 	public PanelTexto() {
 		super();
 		this.addMouseListener(this);
-		
-
-	   
 	}
 
+	//.....
 	@Override
 	public void mouseClicked(java.awt.event.MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		System.out.println(this.getSelectedText());
 		
 	}
+	//.....
 
 	@Override
 	public void mouseEntered(java.awt.event.MouseEvent arg0) {

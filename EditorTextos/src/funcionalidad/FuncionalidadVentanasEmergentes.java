@@ -31,6 +31,9 @@ import componentes.PanelTexto;
 
 public class FuncionalidadVentanasEmergentes {
 	
+	//En esta clase nos vamos a encargar de dotar de funcionalidad a los elementos que encontramos
+	//tanto en el menu superior como en la barra de herramientas que vayan a necesitar invocar una ventana emergente
+	
 	private EditorTexto editorTexto;
 	
 	private PanelTexto jTextPane;
@@ -54,8 +57,8 @@ public class FuncionalidadVentanasEmergentes {
 	private JMenuItem mColorFuente;
 	
 	//
-	String pregunta;
-	String titVentana;
+	private String pregunta;
+	private String titVentana;
 	
 	
 	public FuncionalidadVentanasEmergentes (EditorTexto editorTexto) {
@@ -69,8 +72,10 @@ public class FuncionalidadVentanasEmergentes {
 		this.jbGuardar = editorTexto.getLamina().getBarraHerramientas().getJbGuardar();
 		this.jbSalir = editorTexto.getLamina().getBarraHerramientas().getJbSalir();
 		
+		//Mejora : Añadir imagenes 
 		this.jbAnyadirImg = editorTexto.getLamina().getBarraHerramientas().getJbAnyadirImg();
 		
+		//Mejora : Abrir y guardar archivos con diferentes formatos
 		this.mAbrir = editorTexto.getMenuSuperior().getmAbrir();
 		this.mAbrirHTML = editorTexto.getMenuSuperior().getmAbrirHTML();
 		this.mAbrirRTF = editorTexto.getMenuSuperior().getmAbrirRTF();
@@ -110,37 +115,52 @@ public class FuncionalidadVentanasEmergentes {
 	}
 	
 	
+	//Metodo para insertar imagenes en el JTextPane
 	private void insertarImg() {
 		
+		//Llama a elegirImg que devuelve un archivo
 		File archivoImg = elegirImg();
+		//Si archivoImg no es null
 		if (archivoImg != null) {
+			//Creo un ImageIcon 
 		ImageIcon img = new ImageIcon(archivoImg.toString());	
+			//Inserto el Icono en el JTextPane
 		jTextPane.insertIcon(img);
 		}
 	}
 	
 	private File elegirImg() {
 		// TODO Auto-generated method stub
+		//Traduccion
 		Locale locale = editorTexto.getLocale();
+		//Nuevo JFileChooser para navegar por los archivos del computador
 		JFileChooser explorador = new JFileChooser();
+		
 		String msg = ResourceBundle.getBundle("resources.Etiquetas",locale).getString("tag_buscar_img");
 		String ok = ResourceBundle.getBundle("resources.Etiquetas",locale).getString("tag_abrir_abrir");
+		
+		//Insertamos un titulo y un boton personalizados 
 		explorador.setDialogTitle(msg);
 		explorador.setApproveButtonText(ok);
-		
+		//Creamos un filtro para que solo veamos archivos png, jpg y gif 
 		FileNameExtensionFilter filtro = new FileNameExtensionFilter("png", "jpg", "gif");
+		//Añadimos el filtro al explorador
 		explorador.setFileFilter(filtro);
+		
+		//Si el explorador nos devuelve ok
 		 if (explorador.showOpenDialog(editorTexto) == JFileChooser.APPROVE_OPTION) {
+			 //Devolvemos el archivo seleccionamos
 			return explorador.getSelectedFile();
 		}
 		else {
+			//Devolvemos null
 			return null;
 		}
 	
 	}
 	
 	
-
+	//Permite guardar archivos .txt
 	private void guardarFichero() {
 		
 		Locale locale = editorTexto.getLocale();
@@ -171,7 +191,7 @@ public class FuncionalidadVentanasEmergentes {
 		}
 	}
 	
-	
+	//permite abrir archivos .txt
 	private void abrirFichero() {
 		Locale locale = editorTexto.getLocale();
 		
@@ -224,13 +244,13 @@ public class FuncionalidadVentanasEmergentes {
 		String ruta = explorador.getSelectedFile().getPath();
 		try
 		{
-		// read html from file
+		// lee html del archivo
 		this.jTextPane.setContentType("text/html");
 		EditorKit rtfKit =  this.jTextPane.getEditorKitForContentType("text/html");
 		rtfKit.read(new FileReader(ruta), this.jTextPane.getDocument(), 0);
 		rtfKit = null;
 
-		// convert to text
+		// convierte a texto
 				EditorKit txtKit =  this.jTextPane.getEditorKitForContentType("text/plain");
 				Writer writer = new StringWriter();
 				txtKit.write(writer,this.jTextPane.getDocument(), 0,  this.jTextPane.getDocument().getLength());
@@ -246,6 +266,7 @@ public class FuncionalidadVentanasEmergentes {
 	
 		public void abrirRTF() {
 		
+			//vaciamos el jTextPane
 		this.jTextPane.setText("");
 		
 		Locale locale = editorTexto.getLocale();
@@ -262,13 +283,15 @@ public class FuncionalidadVentanasEmergentes {
 		String ruta = explorador.getSelectedFile().getPath();
 		try
 		{
-		// read rtf from file
+		// Para leer rtf del archivo a recibir primeros debemos asegurarnos de que el tipo de contenido del
+		//	jTextPane es el correcto
 		this.jTextPane.setContentType("text/rtf");
 		EditorKit rtfKit =  this.jTextPane.getEditorKitForContentType("text/rtf");
+		//lee rtf
 		rtfKit.read(new FileReader(ruta), this.jTextPane.getDocument(), 0);
 		rtfKit = null;
 
-		// convert to text
+		// convierte a texto
 				EditorKit txtKit =  this.jTextPane.getEditorKitForContentType("text/plain");
 				Writer writer = new StringWriter();
 				txtKit.write(writer,this.jTextPane.getDocument(), 0,  this.jTextPane.getDocument().getLength());
@@ -281,9 +304,10 @@ public class FuncionalidadVentanasEmergentes {
 		}
 	
 	}
-
+		
 	private void salir(ActionEvent e) {
 		// TODO Auto-generated method stub
+		//Traduccion
 		Locale locale = editorTexto.getLocale();		
 		pregunta = ResourceBundle.getBundle("resources.Etiquetas",locale).getString("tag_salir_pregunta");
 		titVentana = ResourceBundle.getBundle("resources.Etiquetas",locale).getString("tag_salir_titulo");
@@ -297,9 +321,11 @@ public class FuncionalidadVentanasEmergentes {
 		Locale locale = editorTexto.getLocale();
 		JColorChooser ventanaColor = new JColorChooser();
 		ventanaColor.setLocale(locale);
+		//Podemos recoger directamente el color que devuelve el colorChooser
 		Color color = JColorChooser.showDialog(null, ResourceBundle.getBundle("resources.Etiquetas",locale).getString("tag_tit_color"), Color.black);
 		new StyledEditorKit.ForegroundAction("cambiarColor", color).actionPerformed(e);
 	}
+	
 	private void mostrarInformacion(ActionEvent e) {
 		// TODO Auto-generated method stub
 		 Locale locale = editorTexto.getLocale();
@@ -309,9 +335,12 @@ public class FuncionalidadVentanasEmergentes {
 		JOptionPane.showMessageDialog(null, mensaje, titulo, JOptionPane.INFORMATION_MESSAGE);
 	}
 	
+	//Mejora
 	public void guardarHTML() {
+		//Traduccion
 		Locale locale = editorTexto.getLocale();
 		
+		//Nuevo JFileChooser para navegar entre los archivos del sistema
 		JFileChooser explorador = new JFileChooser();
 		
 		String msg = ResourceBundle.getBundle("resources.Etiquetas",locale).getString("tag_guardar_guardar");
@@ -321,18 +350,21 @@ public class FuncionalidadVentanasEmergentes {
 		explorador.setApproveButtonText(ok);
 		if (JFileChooser.APPROVE_OPTION == explorador.showSaveDialog(null))
 		{
-		String filename = explorador.getSelectedFile().toString();
-			   if (!filename .endsWith(".html"))  filename += ".html";
-			   
+		//Capturamos los estilos del jTextPane y los guardamos en un StyledDocument	   
 		StyledDocument doc = this.jTextPane.getStyledDocument();
+		//Creamos un HTMLEditorKit que nos permitira trabajar con los archivos HTML
 		HTMLEditorKit kit = new HTMLEditorKit();
+		//Buffer de salida de datos
 		BufferedOutputStream out;
 		
 		String ruta = explorador.getSelectedFile().getPath();
 		try
 		{	
+			//Intentamos escribir en el archivo seleccionado
 		out = new BufferedOutputStream( new FileOutputStream(ruta));
+			//kit escribe HTML
 		kit.write(out, doc, doc.getStartPosition().getOffset(), doc.getLength());
+			//cerramos el buffer de salida
 		out.close();
 		
 		}catch (Exception e2)
@@ -343,8 +375,15 @@ public class FuncionalidadVentanasEmergentes {
 		
 	}
 	
+	//GuardarRTF tiene la misma estructura que GuardarHTML, solo tenemos que cambiar el HTMLEditorKit por un
+	//RTFEditorKit
+	//Podemos guardar los archivos en .rtf o en .doc
+	//El problema de guardar utilizando los EditorKit es que perderemos las imagenes y la  alineación de los parrafos del texto
+	//pero mantendremos los estilos(color, tamaño, fuente) de este
+	
 	public void guardarRTF() {
 		
+		//Traduccion 
 		Locale locale = editorTexto.getLocale();
 		
 		JFileChooser explorador = new JFileChooser();
@@ -356,6 +395,7 @@ public class FuncionalidadVentanasEmergentes {
 		explorador.setApproveButtonText(ok);
 		if (JFileChooser.APPROVE_OPTION == explorador.showSaveDialog(null))
 		{
+			
 		StyledDocument doc = this.jTextPane.getStyledDocument();
 		RTFEditorKit kit = new RTFEditorKit();
 		BufferedOutputStream out;

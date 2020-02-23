@@ -13,11 +13,7 @@ import javax.swing.JToolBar;
 
 public class BarraHerramientas extends JToolBar{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	
 	
 		//barra de herraminetas
 		
@@ -28,6 +24,9 @@ public class BarraHerramientas extends JToolBar{
 		private JToggleButton jtbNegrita;
 		private JToggleButton jtbCursiva;	
 		private JToggleButton jtbSubrayado;
+			
+		//...............
+		
 		
 		private JButton jbTextIzq;
 		private JButton jbTextCentro;	
@@ -139,7 +138,6 @@ public class BarraHerramientas extends JToolBar{
 			//
 			
 			//lista de todas las fuentes instaladas
-			
 			String listaFuentes[] = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
 			for (int i = 0; i < listaFuentes.length; i++) {	
 			cbFuente.addItem(listaFuentes[i]);
@@ -183,7 +181,7 @@ public class BarraHerramientas extends JToolBar{
 			this.addSeparator();
 			this.add(jbCorreccion);
 			
-			this.setFloatable(false);
+			this.setFloatable(false);	//Impide que el usuario puede mover la barra de herramientas
 			
 		}
 
